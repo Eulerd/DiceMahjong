@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace MohjongWinTest
+namespace Tiles
 {
     class HandTiles
     {
@@ -33,11 +33,38 @@ namespace MohjongWinTest
             tiletypes[(int)tile]++;
         }
 
-        public TileNames GetTile(TileNames tile)
+        public void SetTiles(TileNames[] tiles)
+        {
+            for (int i = 0; i < tiles.Length; i++)
+                tiletypes[(int)tiles[i]]++;
+        }
+
+        public TileNames DiscarTile(TileNames tile)
         {
             tiletypes[(int)tile]--;
 
             return tile;
+        }
+
+        public TileNames[] GetAllTiles()
+        {
+            List<TileNames> tiles = new List<TileNames>();
+
+            for(int i = 0;i < tiletypes.Length;i++)
+            {
+                if(tiletypes[i] != 0)
+                {
+                    for (int j = 0; j < tiletypes[i]; j++)
+                    {
+                        int tmp = i;
+                        tmp += (i / 10);
+
+                        tiles.Add((TileNames)(i - 1));
+                    }
+                }
+            }
+
+            return tiles.ToArray();
         }
 
         public bool IsWinningHand()
@@ -106,6 +133,31 @@ namespace MohjongWinTest
             return false;
         }
 
+        public override string ToString()
+        {
+            string s = "";
+
+            int count = 0;
+            for(int i = 0;i < tiletypes.Length;i++)
+            {
+                if (tiletypes[i] != 0)
+                {
+                    count++;
+                    if (i > 0)
+                        s += " ";
+
+                    s += i + " : " + tiletypes[i];
+
+                    if (count >= 10)
+                    {
+                        s += "\n";
+                        count = 0;
+                    }
+                }
+            }
+
+            return s;
+        }
 
         bool ContainsChow(int index)
         {

@@ -4,11 +4,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace MohjongWinTest
+namespace Tiles
 {
     class WallTiles
     {
-        int[] tiles = new int[136];
+        TileNames[] tiles = new TileNames[136];
         int front = 0;
         int kind_front = 132;
 
@@ -18,23 +18,37 @@ namespace MohjongWinTest
             Shuffing();
         }
 
-        public int Drawing()
+        public TileNames[] FirstDrawing(PlayerStatus status)
+        {
+            TileNames[] tiles;
+            int count = 13;
+            if (status == PlayerStatus.EastPlayer)
+                count++;
+
+            tiles = new TileNames[count];
+            for (int i = 0; i < count; i++)
+                tiles[i] = Drawing();
+
+            return tiles;
+        }
+
+        public TileNames Drawing()
         {
             front++;
 
             return tiles[front - 1];
         }
 
-        public int DrawingFromKindWall()
+        public TileNames DrawingFromKindWall()
         {
             kind_front++;
 
             return tiles[kind_front - 1];
         }
 
-        public int[] GetAllFrontDoras()
+        public TileNames[] GetAllFrontDoras()
         {
-            int[] doras = new int[4];
+            TileNames[] doras = new TileNames[4];
 
             for (int i = 0; i < 4; i++)
                 doras[i] = tiles[i + 124];
@@ -42,9 +56,9 @@ namespace MohjongWinTest
             return doras;
         }
 
-        public int[] GetAllBackDoras()
+        public TileNames[] GetAllBackDoras()
         {
-            int[] doras = new int[4];
+            TileNames[] doras = new TileNames[4];
 
             for (int i = 0; i < 4; i++)
                 doras[i] = tiles[i + 128];
@@ -75,7 +89,7 @@ namespace MohjongWinTest
                 if (count % 10 == 0)
                     count++;
 
-                tiles[i] = count;
+                tiles[i] = (TileNames)count;
             }
         }
 
@@ -89,9 +103,9 @@ namespace MohjongWinTest
                 int num = rand.Next(136);
 
                 // swap
-                int tmp = tiles[i];
+                TileNames tmp = tiles[i];
                 tiles[i] = tiles[num];
-                tiles[num] = tiles[i];
+                tiles[num] = tmp;
             }
         }
     }

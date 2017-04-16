@@ -23,6 +23,8 @@ namespace MohjongWinTest
             WallTiles wt = new WallTiles();
 
             Console.WriteLine(wt.ToString());
+
+
         }
 
         static void PrintTiles(int[] tiles)

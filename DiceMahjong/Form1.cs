@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using DxLibDLL;
+using DiceMohjong.Phases;
 
 namespace DiceMohjong
 {
@@ -18,29 +19,28 @@ namespace DiceMohjong
             InitializeComponent();
         }
 
+        Phase phase;
+        public static int[] TileHandle = new int[35];
+
         private void Form1_Load(object sender, EventArgs e)
         {
+            phase = new StartPhase();
+
             DX.SetUserWindow(this.Handle);
             DX.ChangeWindowMode(1);
             DX.DxLib_Init();
             DX.SetDrawScreen(DX.DX_SCREEN_BACK);
+
+            DX.LoadDivGraph("mahjong01.png", 35, 9, 5, 48, 72, out TileHandle[0]);
         }
 
-        int num = 0;
         public void MainLoop()
         {
+            phase = phase.Update();
             DX.ClearDrawScreen();
-            int mouseX, mouseY;
-            DX.GetMousePoint(out mouseX, out mouseY);
-
-            if (num < 256)
-                num++;
-            else
-                num = 0;
-
-            DX.DrawBox(num, num, num + 10, num + 10, DX.GetColor(255, 255, 255), 1);
-            DX.DrawString(0, 0, mouseX.ToString() + " , " + mouseY.ToString(), DX.GetColor(255, 255, 255));
-            DX.ScreenFlip();
+            
+            if (phase == null)
+                Close();
         }
 
         private void Form1_FormClosed(object sender, FormClosedEventArgs e)

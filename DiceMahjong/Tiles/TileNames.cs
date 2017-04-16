@@ -1,4 +1,4 @@
-﻿namespace MohjongWinTest
+﻿namespace Tiles
 {
     public enum TileNames
     {
@@ -54,6 +54,14 @@
         LeftPlayer,
         OppositePlayer,
         RightPlayer
+    }
+
+    enum PlayerStatus
+    {
+        EastPlayer,
+        SouthPlayer,
+        WestPlayer,
+        NorthPlayer
     }
 
     public enum Elements

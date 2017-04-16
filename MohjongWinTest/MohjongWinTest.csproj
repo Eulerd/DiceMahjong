@@ -42,8 +42,14 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DiscardedTiles.cs" />
+    <Compile Include="DxDLL.cs" />
+    <Compile Include="Phases\Phase.cs" />
+    <Compile Include="Phases\StartPhase.cs" />
+    <Compile Include="Player.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="TakenTiles.cs" />
     <Compile Include="TileNames.cs" />
     <Compile Include="HandTiles.cs" />
     <Compile Include="WallTiles.cs" />
