@@ -25,7 +25,7 @@ namespace Tiles
         public HandTiles(HandTiles t)
         {
             for (int i = 0; i < t.tiletypes.Length; i++)
-                tiletypes[i] = tiletypes[i];
+                tiletypes[i] = t.tiletypes[i];
         }
 
         public void SetTile(TileNames tile)
@@ -55,12 +55,7 @@ namespace Tiles
                 if(tiletypes[i] != 0)
                 {
                     for (int j = 0; j < tiletypes[i]; j++)
-                    {
-                        int tmp = i;
-                        tmp += (i / 10);
-
-                        tiles.Add((TileNames)(i - 1));
-                    }
+                        tiles.Add((TileNames)i);
                 }
             }
 

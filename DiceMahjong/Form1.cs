@@ -20,7 +20,7 @@ namespace DiceMohjong
         }
 
         Phase phase;
-        public static int[] TileHandle = new int[35];
+        public static int[] TileHandle = new int[38];
 
         private void Form1_Load(object sender, EventArgs e)
         {
@@ -32,6 +32,23 @@ namespace DiceMohjong
             DX.SetDrawScreen(DX.DX_SCREEN_BACK);
 
             DX.LoadDivGraph("mahjong01.png", 35, 9, 5, 48, 72, out TileHandle[0]);
+
+            // TileNamesの番号にあわせる
+            int[] TmpHandle = new int[TileHandle.Length];
+            TileHandle.CopyTo(TmpHandle, 0);
+            int num = 1;
+            for(int i = 1;i < TileHandle.Length;i++)
+            {
+                if(i % 10 == 0)
+                {
+                    num++;
+                    continue;
+                }
+
+                TmpHandle[i] = TileHandle[i - num];
+            }
+            TileHandle = TmpHandle;
+
         }
 
         public void MainLoop()
