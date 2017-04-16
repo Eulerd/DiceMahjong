@@ -34,13 +34,13 @@ namespace DiceMohjong.Phases
             string[] ps = { "東", "南", "西", "北" };
             for (int i = 0; i < 4; i++)
             {
-                DX.DrawString(0, i * 72, ps[(int)players[i].Status], DX.GetColor(255, 255, 255));
+                DX.DrawString(0, i * 82, ps[(int)players[i].Status], DX.GetColor(255, 255, 255));
 
                 tiles[i] = new List<TileNames>();
                 tiles[i].AddRange(players[i].MyHandTiles.GetAllTiles());
                 for (int j = 0; j < tiles[i].Count; j++)
                 {
-                    DX.DrawGraph(50 + j * 49, i * 72, Form1.TileHandle[(int)tiles[i][j]], 0);
+                    DX.DrawGraph(50 + j * 49, i * 80, Form1.TileHandle[(int)tiles[i][j]], 0);
                 }
             }
 
@@ -52,11 +52,20 @@ namespace DiceMohjong.Phases
             // 親が捨てる
             if (Count % 2 == 0)
             {
-                for (int i = 0; i < 14; i++)
+                int num = tiles[PlayerNum].Count;
+                int[] tilekeys =
+                    {
+                    DX.KEY_INPUT_1, DX.KEY_INPUT_2, DX.KEY_INPUT_3, DX.KEY_INPUT_4, DX.KEY_INPUT_5,
+                    DX.KEY_INPUT_6, DX.KEY_INPUT_7, DX.KEY_INPUT_8,  DX.KEY_INPUT_9, DX.KEY_INPUT_0,
+                    DX.KEY_INPUT_MINUS, DX.KEY_INPUT_PREVTRACK, DX.KEY_INPUT_YEN, DX.KEY_INPUT_SPACE
+                    };
+                
+                for(int i = 0;i < tilekeys.Length;i++)
                 {
-                    if (key.IsPressed((i == (tiles[PlayerNum].Count - 1)) ? DX.KEY_INPUT_SPACE : (DX.KEY_INPUT_1 + i)))
+                    if(key.IsPressed(tilekeys[i]))
                     {
                         tile = tiles[PlayerNum][i];
+                        // 打牌
                         players[PlayerNum].MyHandTiles.DiscarTile(tile);
 
                         Count++;
@@ -67,6 +76,7 @@ namespace DiceMohjong.Phases
             }
             else
             {
+                // ツモ
                 players[PlayerNum].MyHandTiles.SetTile(walltiles.Drawing());
                 Count++;
             }
