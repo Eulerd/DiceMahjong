@@ -33,6 +33,23 @@ namespace Tiles
             tiletypes[(int)tile]++;
         }
 
+        public TileNames GetTile(int index)
+        {
+            int count = 0;
+            for(int i = 0;i < tiletypes.Length;i++)
+            {
+                for(int j = 0;j < tiletypes[i];j++)
+                {
+                    if (index == count)
+                        return (TileNames)i;
+
+                    count++;
+                }
+            }
+
+            throw new ArgumentOutOfRangeException();
+        }
+
         public void SetTiles(TileNames[] tiles)
         {
             for (int i = 0; i < tiles.Length; i++)

@@ -28,19 +28,26 @@ namespace DiceMohjong.Phases
 
         protected override Phase update()
         {
-            List<TileNames>[] tiles = new List<TileNames>[4];
-
             // Debug
             string[] ps = { "東", "南", "西", "北" };
+            int j;
+
             for (int i = 0; i < 4; i++)
             {
                 DX.DrawString(0, i * 82, ps[(int)players[i].Status], DX.GetColor(255, 255, 255));
 
-                tiles[i] = new List<TileNames>();
-                tiles[i].AddRange(players[i].MyHandTiles.GetAllTiles());
-                for (int j = 0; j < tiles[i].Count; j++)
+                j = 0;
+                foreach(var tile in players[i].MyHandTiles.GetAllTiles())
                 {
-                    DX.DrawGraph(50 + j * 49, i * 80, Form1.TileHandle[(int)tiles[i][j]], 0);
+                    DX.DrawGraph(50 + j * 49, i * 80, Form1.TileHandle[(int)tile], 0);
+                    j++;
+                }
+
+                j = 0;
+                foreach(var tile in players[i].MyDiscardedTiles.GetAllTiles())
+                {
+                    DX.DrawGraph(800 + j * 49, i * 80, Form1.TileHandle[(int)tile], 0);
+                    j++;
                 }
             }
 
@@ -52,7 +59,6 @@ namespace DiceMohjong.Phases
             // 親が捨てる
             if (Count % 2 == 0)
             {
-                int num = tiles[PlayerNum].Count;
                 int[] tilekeys =
                     {
                     DX.KEY_INPUT_1, DX.KEY_INPUT_2, DX.KEY_INPUT_3, DX.KEY_INPUT_4, DX.KEY_INPUT_5,
@@ -64,8 +70,9 @@ namespace DiceMohjong.Phases
                 {
                     if(key.IsPressed(tilekeys[i]))
                     {
-                        tile = tiles[PlayerNum][i];
+                        tile = players[PlayerNum].MyHandTiles.GetTile(i);
                         // 打牌
+                        players[PlayerNum].MyDiscardedTiles.AddTile(tile);
                         players[PlayerNum].MyHandTiles.DiscarTile(tile);
 
                         Count++;

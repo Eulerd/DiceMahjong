@@ -11,7 +11,7 @@ namespace DiceMohjong
     {
         List<TakenTile> MyTakenTiles = new List<TakenTile>();
         public HandTiles MyHandTiles = new HandTiles();
-        DiscardedTiles MyDiscardedTiles = new DiscardedTiles();
+        public DiscardedTiles MyDiscardedTiles = new DiscardedTiles();
 
         bool IsReach = false;
         public PlayerStatus Status;

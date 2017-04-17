@@ -22,6 +22,16 @@ namespace Tiles
             return tiles.Last().Key;
         }
 
+        public TileNames[] GetAllTiles()
+        {
+            List<TileNames> tmp_tiles = new List<TileNames>();
+
+            for(int i = 0;i < tiles.Count;i++)
+                tmp_tiles.Add(tiles[i].Key);
+
+            return tmp_tiles.ToArray();
+        }
+
         public void Reach()
         {
             ChangeStatus(tiles.Count - 1, TileStatus.Reach);
