@@ -22,8 +22,6 @@ namespace Tiles
         {
             TileNames[] tiles;
             int count = 13;
-            if (status == PlayerStatus.EastPlayer)
-                count++;
 
             tiles = new TileNames[count];
             for (int i = 0; i < count; i++)

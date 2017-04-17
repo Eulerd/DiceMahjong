@@ -32,12 +32,13 @@ namespace DiceMohjong.Phases
             string[] ps = { "東", "南", "西", "北" };
             int j;
 
+            DX.DrawGraph(638, PlayerNum * 80, Form1.TileHandle[(int)players[PlayerNum].MyHandTiles.LastTile], 0);
             for (int i = 0; i < 4; i++)
             {
                 DX.DrawString(0, i * 82, ps[(int)players[i].Status], DX.GetColor(255, 255, 255));
 
                 j = 0;
-                foreach(var tile in players[i].MyHandTiles.GetAllTiles())
+                foreach (var tile in players[i].MyHandTiles.GetAllTiles())
                 {
                     DX.DrawGraph(50 + j * 49, i * 80, Form1.TileHandle[(int)tile], 0);
                     j++;
@@ -56,7 +57,6 @@ namespace DiceMohjong.Phases
             DX.DrawGraph(250, 400, Form1.TileHandle[(int)tile], 0);
             // End Debug
 
-            // 親が捨てる
             if (Count % 2 == 0)
             {
                 int[] tilekeys =
@@ -73,6 +73,8 @@ namespace DiceMohjong.Phases
                         tile = players[PlayerNum].MyHandTiles.GetTile(i);
                         // 打牌
                         players[PlayerNum].MyDiscardedTiles.AddTile(tile);
+
+                        // 河に追加
                         players[PlayerNum].MyHandTiles.DiscarTile(tile);
 
                         Count++;

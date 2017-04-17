@@ -10,31 +10,40 @@ namespace Tiles
     {
         int[] tiletypes = new int[38];
 
+        public TileNames LastTile { get; private set; }
+
         public HandTiles()
         {
             for (int i = 0; i < tiletypes.Length; i++)
                 tiletypes[i] = 0;
         }
 
-        public HandTiles(int[] hands)
+        public HandTiles(TileNames[] hands)
         {
-            for (int i = 0; i < hands.Length; i++)
-                tiletypes[hands[i]]++;
+            for (int i = 0; i < hands.Length - 1; i++)
+                tiletypes[(int)hands[i]]++;
+
+            LastTile = hands.Last();
         }
     
         public HandTiles(HandTiles t)
         {
             for (int i = 0; i < t.tiletypes.Length; i++)
                 tiletypes[i] = t.tiletypes[i];
+
+            LastTile = t.LastTile;
         }
 
         public void SetTile(TileNames tile)
         {
-            tiletypes[(int)tile]++;
+            LastTile = tile;
         }
 
         public TileNames GetTile(int index)
         {
+            if (index == 13)
+                return LastTile;
+
             int count = 0;
             for(int i = 0;i < tiletypes.Length;i++)
             {
@@ -52,12 +61,15 @@ namespace Tiles
 
         public void SetTiles(TileNames[] tiles)
         {
-            for (int i = 0; i < tiles.Length; i++)
+            for (int i = 0; i < tiles.Length - 1; i++)
                 tiletypes[(int)tiles[i]]++;
+
+            LastTile = tiles.Last();
         }
 
         public TileNames DiscarTile(TileNames tile)
         {
+            tiletypes[(int)LastTile]++;
             tiletypes[(int)tile]--;
 
             return tile;
