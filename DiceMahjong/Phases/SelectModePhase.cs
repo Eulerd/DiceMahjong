@@ -7,6 +7,9 @@ using DxLibDLL;
 
 namespace DiceMohjong.Phases
 {
+    /// <summary>
+    /// モード選択フェーズ
+    /// </summary>
     class SelectModePhase : Phase
     {
         protected override Phase update()

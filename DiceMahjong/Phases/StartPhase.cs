@@ -7,10 +7,24 @@ using DxLibDLL;
 
 namespace DiceMohjong.Phases
 {
+    /// <summary>
+    /// スタートフェーズ
+    /// </summary>
     class StartPhase : Phase
     {
+        /// <summary>
+        /// 選択表示用
+        /// </summary>
         int pos = 0;
+
+        /// <summary>
+        /// モード配列
+        /// </summary>
         string[] ModeNames = { "ゲームスタート", "設定" };
+
+        /// <summary>
+        /// モードの個数
+        /// </summary>
         int ModeCount;
 
         public StartPhase()

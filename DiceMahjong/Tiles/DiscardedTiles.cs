@@ -6,8 +6,14 @@ using System.Threading.Tasks;
 
 namespace Tiles
 {
+    /// <summary>
+    /// 河の牌
+    /// </summary>
     class DiscardedTiles
     {
+        /// <summary>
+        /// 河にある牌リスト
+        /// </summary>
         List<KeyValuePair<TileNames, TileStatus>> tiles = new List<KeyValuePair<TileNames, TileStatus>>();
 
         public void AddTile(TileNames tile)

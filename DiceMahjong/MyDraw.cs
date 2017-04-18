@@ -9,6 +9,10 @@ namespace DiceMohjong
 {
     class MyDraw
     {
+        /// <summary>
+        /// 全画面に描写する
+        /// </summary>
+        /// <param name="color">描写する色</param>
         public static void DrawScreen(uint color)
         {
             int X, Y;

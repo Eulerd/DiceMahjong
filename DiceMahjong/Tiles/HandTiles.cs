@@ -8,16 +8,46 @@ namespace Tiles
 {
     class HandTiles
     {
+        /// <summary>
+        /// どの牌が何枚あるか
+        /// </summary>
         int[] tiletypes = new int[38];
 
+        /// <summary>
+        /// 自摸した牌
+        /// </summary>
         public TileNames LastTile { get; private set; }
 
+        public int TileCount
+        {
+            get
+            {
+                int c = 0;
+
+                for (int i = 0; i < tiletypes.Length; i++)
+                    c += tiletypes[i];
+
+                return c;
+            }
+            private set
+            {
+                TileCount = value;
+            }
+        }
+
+        /// <summary>
+        /// 初期化
+        /// </summary>
         public HandTiles()
         {
             for (int i = 0; i < tiletypes.Length; i++)
                 tiletypes[i] = 0;
         }
 
+        /// <summary>
+        /// 手牌リストから初期化する
+        /// </summary>
+        /// <param name="hands">元になる手牌</param>
         public HandTiles(TileNames[] hands)
         {
             for (int i = 0; i < hands.Length - 1; i++)
@@ -25,7 +55,11 @@ namespace Tiles
 
             LastTile = hands.Last();
         }
-    
+
+        /// <summary>
+        /// 他のクラスを元に作成する
+        /// </summary>
+        /// <param name="t">元になるクラス</param>
         public HandTiles(HandTiles t)
         {
             for (int i = 0; i < t.tiletypes.Length; i++)
@@ -34,11 +68,20 @@ namespace Tiles
             LastTile = t.LastTile;
         }
 
+        /// <summary>
+        /// 自摸する
+        /// </summary>
+        /// <param name="tile">自摸する牌</param>
         public void SetTile(TileNames tile)
         {
             LastTile = tile;
         }
 
+        /// <summary>
+        /// 指定の場所の手牌を取得する
+        /// </summary>
+        /// <param name="index">取得する手牌の番号</param>
+        /// <returns>取得した牌</returns>
         public TileNames GetTile(int index)
         {
             if (index == 13)
@@ -59,6 +102,10 @@ namespace Tiles
             throw new ArgumentOutOfRangeException();
         }
 
+        /// <summary>
+        /// 牌配列から追加する
+        /// </summary>
+        /// <param name="tiles">元になる牌配列</param>
         public void SetTiles(TileNames[] tiles)
         {
             for (int i = 0; i < tiles.Length - 1; i++)
@@ -67,14 +114,22 @@ namespace Tiles
             LastTile = tiles.Last();
         }
 
-        public TileNames DiscarTile(TileNames tile)
+        /// <summary>
+        /// 牌を1枚捨てる
+        /// </summary>
+        /// <param name="tile">捨てる牌</param>
+        public void DiscarTile(TileNames tile)
         {
+            // 自摸牌分追加する
             tiletypes[(int)LastTile]++;
-            tiletypes[(int)tile]--;
 
-            return tile;
+            tiletypes[(int)tile]--;
         }
 
+        /// <summary>
+        /// 手牌を取得する
+        /// </summary>
+        /// <returns>手牌</returns>
         public TileNames[] GetAllTiles()
         {
             List<TileNames> tiles = new List<TileNames>();
@@ -91,16 +146,31 @@ namespace Tiles
             return tiles.ToArray();
         }
 
+        /// <summary>
+        /// この手牌でポンできるか
+        /// </summary>
+        /// <param name="tile">ポンできるか調べる牌</param>
+        /// <returns>ポンできるか</returns>
         public bool CanPon(TileNames tile)
         {
             return (tiletypes[(int)tile] >= 2);
         }
 
+        /// <summary>
+        /// この手牌でカンできるか
+        /// </summary>
+        /// <param name="tile">カンできるか調べる牌</param>
+        /// <returns>カンできるか</returns>
         public bool Cankan(TileNames tile)
         {
             return (tiletypes[(int)tile] >= 3);
         }
 
+        /// <summary>
+        /// この手牌でチーできるか
+        /// </summary>
+        /// <param name="tile">チーできるか調べる牌</param>
+        /// <returns>チーできるか</returns>
         public bool CanChow(TileNames tile)
         {
             if (TileNames.East <= tile)
@@ -121,6 +191,10 @@ namespace Tiles
             return flag;
         }
 
+        /// <summary>
+        /// あがれる手牌か
+        /// </summary>
+        /// <returns>あがれるか</returns>
         public bool IsWinningHand()
         {
             HandTiles tmp_tiletypes = new HandTiles(this);
@@ -169,7 +243,7 @@ namespace Tiles
                     for (int j = 1; j < 38; j++)
                     {
                         // 順子を含むか
-                        if (tmp_tiletypes.ContainsChow(j))
+                        if (tmp_tiletypes.ContainsChow((TileNames)j))
                         {
                             tmp_tiletypes[j]--;
                             tmp_tiletypes[j + 1]--;
@@ -186,7 +260,7 @@ namespace Tiles
 
             return false;
         }
-
+        
         public override string ToString()
         {
             string s = "";
@@ -213,14 +287,25 @@ namespace Tiles
             return s;
         }
 
-        bool ContainsChow(int index)
+        /// <summary>
+        /// 順子が含まれるか
+        /// </summary>
+        /// <param name="tile">順子の一番前の牌</param>
+        /// <returns>含まれるか</returns>
+        bool ContainsChow(TileNames tile)
         {
+            int index = (int)tile;
+
             // 数牌の種類を超えての順子判定は、番号を種類ごとに一つ飛ばして割り振ってあるため起こらない
             return
-                (index <= 27 && 
+                (index <= (int)TileNames.East && 
                 (tiletypes[index] >= 1 && tiletypes[index + 1] >= 1 && tiletypes[index + 2] >= 1));
         }
 
+        /// <summary>
+        /// 手牌が国士無双かどうか
+        /// </summary>
+        /// <returns>国士無双か</returns>
         bool IsKokushi()
         {
             // 幺九牌のリスト
@@ -245,6 +330,10 @@ namespace Tiles
             return false;
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
         bool IsZeroAllTiles()
         {
             for(int i = 0;i < tiletypes.Length;i++)

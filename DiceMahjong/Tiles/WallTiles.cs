@@ -1,24 +1,44 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Tiles
 {
     class WallTiles
     {
+        /// <summary>
+        /// 山牌
+        /// </summary>
         TileNames[] tiles = new TileNames[136];
-        int front = 0;
-        int kind_front = 132;
 
+        /// <summary>
+        /// 山牌の次自摸される場所
+        /// </summary>
+        int front = 0;
+
+        /// <summary>
+        /// 王稗の次自摸される場所
+        /// </summary>
+        int king_front = 132;
+
+        /// <summary>
+        /// 山牌が何回自摸されたか
+        /// </summary>
+        public int Count { get; private set; }
+
+        /// <summary>
+        /// 値を初期化してから洗牌する
+        /// </summary>
         public WallTiles()
         {
             WallInit();
             Shuffing();
+            Count = 0;
         }
 
-        public TileNames[] FirstDrawing(PlayerStatus status)
+        /// <summary>
+        /// 手牌を配る
+        /// </summary>
+        /// <returns>手牌</returns>
+        public TileNames[] FirstDrawing()
         {
             TileNames[] tiles;
             int count = 14;
@@ -30,20 +50,33 @@ namespace Tiles
             return tiles;
         }
 
+        /// <summary>
+        /// 自摸
+        /// </summary>
+        /// <returns>自摸した牌</returns>
         public TileNames Drawing()
         {
             front++;
+            Count++;
 
             return tiles[front - 1];
         }
 
-        public TileNames DrawingFromKindWall()
+        /// <summary>
+        /// 王稗から自摸
+        /// </summary>
+        /// <returns>王稗から自摸した牌</returns>
+        public TileNames DrawingFromKingWall()
         {
-            kind_front++;
+            king_front++;
 
-            return tiles[kind_front - 1];
+            return tiles[king_front - 1];
         }
 
+        /// <summary>
+        /// 表ドラをすべて取得する
+        /// </summary>
+        /// <returns>すべての表ドラ</returns>
         public TileNames[] GetAllFrontDoras()
         {
             TileNames[] doras = new TileNames[4];
@@ -54,6 +87,10 @@ namespace Tiles
             return doras;
         }
 
+        /// <summary>
+        /// 裏ドラをすべて取得する
+        /// </summary>
+        /// <returns>すべての裏ドラ</returns>
         public TileNames[] GetAllBackDoras()
         {
             TileNames[] doras = new TileNames[4];
@@ -64,6 +101,10 @@ namespace Tiles
             return doras;
         }
 
+        /// <summary>
+        /// 山牌の番号を並べて文字列化
+        /// </summary>
+        /// <returns>山牌の中身</returns>
         public override string ToString()
         {
             string S = "";
@@ -76,6 +117,9 @@ namespace Tiles
             return S;
         }
 
+        /// <summary>
+        /// イーピンから順番に4枚ずつ山牌に入れる
+        /// </summary>
         void WallInit()
         {
             int count = 0;
@@ -91,6 +135,9 @@ namespace Tiles
             }
         }
 
+        /// <summary>
+        /// 洗牌
+        /// </summary>
         void Shuffing()
         {
             Random rand;
