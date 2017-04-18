@@ -21,7 +21,7 @@ namespace Tiles
         public TileNames[] FirstDrawing(PlayerStatus status)
         {
             TileNames[] tiles;
-            int count = 13;
+            int count = 14;
 
             tiles = new TileNames[count];
             for (int i = 0; i < count; i++)

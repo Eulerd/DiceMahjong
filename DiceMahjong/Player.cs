@@ -24,5 +24,22 @@ namespace DiceMohjong
             MyHandTiles.SetTiles(walltiles.FirstDrawing(status));
         }
         
+        public TileNames GetTile(int index)
+        {
+            TileNames tile = MyHandTiles.GetTile(index);
+            
+            // 打牌
+            MyDiscardedTiles.AddTile(tile);
+
+            // 河に追加
+            MyHandTiles.DiscarTile(tile);
+
+            return tile;
+        }
+
+        public void SetTile(TileNames tile)
+        {
+            MyHandTiles.SetTile(tile);
+        }
     }
 }

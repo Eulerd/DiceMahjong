@@ -91,6 +91,36 @@ namespace Tiles
             return tiles.ToArray();
         }
 
+        public bool CanPon(TileNames tile)
+        {
+            return (tiletypes[(int)tile] >= 2);
+        }
+
+        public bool Cankan(TileNames tile)
+        {
+            return (tiletypes[(int)tile] >= 3);
+        }
+
+        public bool CanChow(TileNames tile)
+        {
+            if (TileNames.East <= tile)
+                return false;
+
+            int i = (int)tile % 10;
+            bool flag = false;
+
+            if (!flag && 1 <= i && i <= 7)
+                flag = (tiletypes[i + 1] > 0 && tiletypes[i + 2] > 0);
+
+            if (!flag && 2 <= i && i <= 8)
+                flag = (tiletypes[i - 1] > 0 && tiletypes[i + 1] > 0);
+
+            if (!flag && 3 <= i && i <= 9)
+                flag = (tiletypes[i - 2] > 0 && tiletypes[i - 1] > 0);
+
+            return flag;
+        }
+
         public bool IsWinningHand()
         {
             HandTiles tmp_tiletypes = new HandTiles(this);
