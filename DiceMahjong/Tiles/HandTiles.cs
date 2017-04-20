@@ -42,6 +42,8 @@ namespace Tiles
         {
             for (int i = 0; i < tiletypes.Length; i++)
                 tiletypes[i] = 0;
+
+            LastTile = TileNames.Null;
         }
 
         /// <summary>
@@ -74,6 +76,9 @@ namespace Tiles
         /// <param name="tile">自摸する牌</param>
         public void SetTile(TileNames tile)
         {
+            if (LastTile != TileNames.Null)
+                throw new ArgumentException("打牌される前に自摸されています。");
+
             LastTile = tile;
         }
 
@@ -122,6 +127,7 @@ namespace Tiles
         {
             // 自摸牌分追加する
             tiletypes[(int)LastTile]++;
+            LastTile = TileNames.Null;
 
             tiletypes[(int)tile]--;
         }

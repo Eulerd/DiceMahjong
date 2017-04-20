@@ -2,6 +2,8 @@
 {
     public enum TileNames
     {
+        Null = 334,
+
         Bamboo1 = 1,
         Bamboo2 = 2,
         Bamboo3 = 3,

@@ -66,7 +66,7 @@ namespace DiceMohjong.Phases
         /// <summary>
         /// デバッグ用牌
         /// </summary>
-        TileNames tile = TileNames.Dots1;
+        TileNames debug_tile = TileNames.Dots1;
 
         /// <summary>
         /// 東風戦のメイン
@@ -103,7 +103,7 @@ namespace DiceMohjong.Phases
 
             DX.DrawString(0, 500, walltiles.Count.ToString(), DX.GetColor(255, 255, 255));
 
-            DX.DrawGraph(250, 400, Form1.TileHandle[(int)tile], 0);
+            DX.DrawGraph(250, 400, Form1.TileHandle[(int)debug_tile], 0);
             // End Debug
 
             for (int i = 0; i < tilekeys.Length; i++)
@@ -112,13 +112,13 @@ namespace DiceMohjong.Phases
                 {
                     if(pressed[i])
                     {
-                        tile = players[PlayerNum].GetTileNumberOf(i);
+                        debug_tile = players[PlayerNum].GetTileNumberOf(i);
+                        players[PlayerNum].RemoveTile(debug_tile);
                         players[PlayerNum].AddTile(walltiles.Drawing());
 
                         PlayerNum = (PlayerNum + 1) % 4;
 
                         PressedInit();
-                        pressed[13] = true;
                     }
                     else
                     {

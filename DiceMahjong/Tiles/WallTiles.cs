@@ -59,6 +59,9 @@ namespace Tiles
             front++;
             Count++;
 
+            if (Count >= 122)
+                throw new IndexOutOfRangeException("王稗から通常自摸できません。");
+
             return tiles[front - 1];
         }
 
