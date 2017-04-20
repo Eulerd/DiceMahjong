@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Tiles
+namespace MahjongLib
 {
     class WallTiles
     {

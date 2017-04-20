@@ -1,5 +1,15 @@
-﻿namespace Tiles
+﻿namespace MahjongLib
 {
+    public static class Mahjong
+    {
+        public const int HandTileCount = 14;
+        public const int TileCount = 136;
+        public const int KingTilesCount = 14;
+        public const int CanGetTilesCount = 122;
+
+    }
+
+
     public enum TileNames
     {
         Null = 334,

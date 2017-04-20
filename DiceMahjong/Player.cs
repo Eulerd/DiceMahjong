@@ -1,5 +1,5 @@
 ﻿using System.Collections.Generic;
-using Tiles;
+using MahjongLib;
 
 namespace DiceMohjong
 {

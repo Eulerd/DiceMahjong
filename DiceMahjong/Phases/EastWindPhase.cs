@@ -1,4 +1,4 @@
-﻿using Tiles;
+﻿using MahjongLib;
 using DxLibDLL;
 
 namespace DiceMohjong.Phases
@@ -18,36 +18,12 @@ namespace DiceMohjong.Phases
         /// </summary>
         WallTiles walltiles = new WallTiles();
 
+        KeyForTiles keytiles = new KeyForTiles();
+
         /// <summary>
         /// 現在アクティブな人
         /// </summary>
         int PlayerNum;
-
-        /// <summary>
-        /// 牌を切るためのキー配列
-        /// </summary>
-        int[] tilekeys =
-            {
-                    DX.KEY_INPUT_1, DX.KEY_INPUT_2, DX.KEY_INPUT_3, DX.KEY_INPUT_4, DX.KEY_INPUT_5,
-                    DX.KEY_INPUT_6, DX.KEY_INPUT_7, DX.KEY_INPUT_8,  DX.KEY_INPUT_9, DX.KEY_INPUT_0,
-                    DX.KEY_INPUT_MINUS, DX.KEY_INPUT_PREVTRACK, DX.KEY_INPUT_YEN, DX.KEY_INPUT_SPACE
-                    };
-
-        /// <summary>
-        /// 牌を切るためのキーが前に押されているか
-        /// </summary>
-        static bool[] pressed = new bool[14];
-
-        /// <summary>
-        /// pressed配列の初期化
-        /// </summary>
-        void PressedInit()
-        {
-            for (int i = 0; i < pressed.Length; i++)
-            {
-                pressed[i] = false;
-            }
-        }
 
         /// <summary>
         /// 配牌を各プレイヤーに渡し、初期化する
@@ -58,9 +34,8 @@ namespace DiceMohjong.Phases
                 players[i] = new Player(PlayerStatus.EastPlayer + i, walltiles);
             
             PlayerNum = 0;
+            
 
-            for (int i = 0; i < pressed.Length; i++)
-                pressed[i] = false;
         }
 
         /// <summary>
@@ -78,7 +53,7 @@ namespace DiceMohjong.Phases
             string[] ps = { "東", "南", "西", "北" };
             int j;
 
-            DX.DrawGraph(687, PlayerNum * 80 - ((pressed[13]) ? 10 : 0), Form1.TileHandle[(int)players[PlayerNum].MyHandTiles.LastTile], 0);
+            DX.DrawGraph(687, PlayerNum * 80 - ((keytiles.LastKeyPressed()) ? 10 : 0), Form1.TileHandle[(int)players[PlayerNum].MyHandTiles.LastTile], 0);
             for (int i = 0; i < 4; i++)
             {
                 DX.DrawString(0, i * 82, ps[(int)players[i].Status], DX.GetColor(255, 255, 255));
@@ -86,7 +61,7 @@ namespace DiceMohjong.Phases
                 j = 0;
                 foreach (var tile in players[i].MyHandTiles.GetAllTiles())
                 {
-                    DX.DrawGraph(50 + j * 49, i * 80 - ((pressed[j] && PlayerNum == i) ? 10 : 0), Form1.TileHandle[(int)tile], 0);
+                    DX.DrawGraph(50 + j * 49, i * 80 - ((keytiles.pressed[j] && PlayerNum == i) ? 10 : 0), Form1.TileHandle[(int)tile], 0);
                     j++;
                 }
 
@@ -106,25 +81,15 @@ namespace DiceMohjong.Phases
             DX.DrawGraph(250, 400, Form1.TileHandle[(int)debug_tile], 0);
             // End Debug
 
-            for (int i = 0; i < tilekeys.Length; i++)
+            for (int i = 0; i < Mahjong.HandTileCount; i++)
             {
-                if (key.IsPressed(tilekeys[i]))
+                if(keytiles.IsKeyByUpdate(key, i))
                 {
-                    if(pressed[i])
-                    {
-                        debug_tile = players[PlayerNum].GetTileNumberOf(i);
-                        players[PlayerNum].RemoveTile(debug_tile);
-                        players[PlayerNum].AddTile(walltiles.Drawing());
+                    debug_tile = players[PlayerNum].GetTileNumberOf(i);
+                    players[PlayerNum].RemoveTile(debug_tile);
+                    players[PlayerNum].AddTile(walltiles.Drawing());
 
-                        PlayerNum = (PlayerNum + 1) % 4;
-
-                        PressedInit();
-                    }
-                    else
-                    {
-                        PressedInit();
-                        pressed[i] = true;
-                    }
+                    PlayerNum = (PlayerNum + 1) % 4;
                 }
             }
 

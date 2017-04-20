@@ -53,6 +53,7 @@
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
     <Compile Include="Key.cs" />
+    <Compile Include="KeyForTiles.cs" />
     <Compile Include="MyDraw.cs" />
     <Compile Include="Phases\EastWindPhase.cs" />
     <Compile Include="Phases\OptionPhase.cs" />
