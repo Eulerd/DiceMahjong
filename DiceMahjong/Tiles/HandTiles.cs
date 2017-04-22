@@ -108,15 +108,13 @@ namespace MahjongLib
         }
 
         /// <summary>
-        /// 牌配列から追加する
+        /// 配牌を手牌に追加する
         /// </summary>
         /// <param name="tiles">元になる牌配列</param>
-        public void SetTiles(TileNames[] tiles)
+        public void SetFirstTiles(TileNames[] tiles)
         {
-            for (int i = 0; i < tiles.Length - 1; i++)
+            for (int i = 0; i < tiles.Length; i++)
                 tiletypes[(int)tiles[i]]++;
-
-            LastTile = tiles.Last();
         }
 
         /// <summary>

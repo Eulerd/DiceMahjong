@@ -1,14 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
+﻿using DiceMohjong.Phases;
 using DxLibDLL;
-using DiceMohjong.Phases;
+using System;
+using System.Windows.Forms;
+using MahjongLib;
 
 namespace DiceMohjong
 {
@@ -20,7 +14,6 @@ namespace DiceMohjong
         }
 
         Phase phase;
-        public static int[] TileHandle = new int[38];
 
         private void Form1_Load(object sender, EventArgs e)
         {
@@ -31,24 +24,23 @@ namespace DiceMohjong
             DX.DxLib_Init();
             DX.SetDrawScreen(DX.DX_SCREEN_BACK);
 
-            DX.LoadDivGraph("mahjong01.png", 35, 9, 5, 48, 72, out TileHandle[0]);
+            DX.LoadDivGraph("mahjong01.png", 35, 9, 5, 48, 72, out Mahjong.TileHandle[0]);
 
             // TileNamesの番号にあわせる
-            int[] TmpHandle = new int[TileHandle.Length];
-            TileHandle.CopyTo(TmpHandle, 0);
+            int[] TmpHandle = new int[Mahjong.TileHandle.Length];
+            Mahjong.TileHandle.CopyTo(TmpHandle, 0);
             int num = 1;
-            for(int i = 1;i < TileHandle.Length;i++)
+            for (int i = 1; i < Mahjong.TileHandle.Length; i++)
             {
-                if(i % 10 == 0)
+                if (i % 10 == 0)
                 {
                     num++;
                     continue;
                 }
 
-                TmpHandle[i] = TileHandle[i - num];
+                TmpHandle[i] = Mahjong.TileHandle[i - num];
             }
-            TileHandle = TmpHandle;
-
+            Mahjong.TileHandle = TmpHandle;
         }
 
         public void MainLoop()

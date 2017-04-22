@@ -68,7 +68,7 @@
     <Compile Include="Tiles\DiscardedTiles.cs" />
     <Compile Include="Tiles\HandTiles.cs" />
     <Compile Include="Tiles\TakenTiles.cs" />
-    <Compile Include="Tiles\TileNames.cs" />
+    <Compile Include="Tiles\MahjongLib.cs" />
     <Compile Include="Tiles\WallTiles.cs" />
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>

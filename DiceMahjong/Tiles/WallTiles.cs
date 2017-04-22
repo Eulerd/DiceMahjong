@@ -41,7 +41,7 @@ namespace MahjongLib
         public TileNames[] FirstDrawing()
         {
             TileNames[] tiles;
-            int count = 14;
+            int count = 13;
 
             tiles = new TileNames[count];
             for (int i = 0; i < count; i++)

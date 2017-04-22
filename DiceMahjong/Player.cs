@@ -35,7 +35,10 @@ namespace DiceMohjong
             Status = status;
 
             // 配牌
-            MyHandTiles.SetTiles(walltiles.FirstDrawing());
+            MyHandTiles.SetFirstTiles(walltiles.FirstDrawing());
+
+            if (status == PlayerStatus.EastPlayer)
+                MyHandTiles.SetTile(walltiles.Drawing());
         }
         
         /// <summary>

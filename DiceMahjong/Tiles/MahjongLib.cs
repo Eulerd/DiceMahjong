@@ -7,6 +7,7 @@
         public const int KingTilesCount = 14;
         public const int CanGetTilesCount = 122;
 
+        public static int[] TileHandle = new int[38];
     }
 
 
@@ -74,43 +75,5 @@
         SouthPlayer,
         WestPlayer,
         NorthPlayer
-    }
-
-    public enum Elements
-    {
-        SeatEast = 1,
-        SeatSouth = 1,
-        SeatWest = 1,
-        SeatNorth = 1,
-        RoundEast = 1,
-        RoundSouth = 1,
-        RoundWest = 1,
-        RoundNorth = 1,
-        Reach = 1,
-        SelfDrawn = 1,
-        Pinhu = 1,
-        AllSimples = 1,
-        PureDoubleChow = 1,
-        KingTileDraw = 1,
-        Tyankan = 1,
-        LastTileDrown = 1,
-        LonLastTile = 1,
-
-        DoubleReach = 2,
-        PureStraight = 2,
-        TripleRun = 2,
-        TriplePung = 2,
-        AllPungs = 2,
-        ThreePungs = 2,
-        ThreeKongs = 2,
-        SevenPairs = 2,
-        Tyanta = 2,
-        Honrouto = 2,
-        LittleThreeDragons = 2,
-
-        HalfFlush = 3,
-        Zyuntyan = 3,
-        DoublePureDoubleChow = 3,
-        FullFlush = 6,
     }
 }
