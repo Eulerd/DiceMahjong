@@ -16,6 +16,8 @@ namespace DiceMohjong.Phases
         {
             MyDraw.DrawScreen(DX.GetColor(100, 255, 100));
 
+            DX.DrawString(0, 0, "東風戦", DX.GetColor(0, 0, 0));
+
             if (key.IsPressed(DX.KEY_INPUT_RETURN))
                 return new EastWindPhase();
 

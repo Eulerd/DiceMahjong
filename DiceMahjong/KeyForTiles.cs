@@ -18,11 +18,18 @@ namespace DiceMohjong
         /// 牌を切るためのキー配列
         /// </summary>
         int[] tilekeys =
-            {
-                    DX.KEY_INPUT_1, DX.KEY_INPUT_2, DX.KEY_INPUT_3, DX.KEY_INPUT_4, DX.KEY_INPUT_5,
-                    DX.KEY_INPUT_6, DX.KEY_INPUT_7, DX.KEY_INPUT_8,  DX.KEY_INPUT_9, DX.KEY_INPUT_0,
-                    DX.KEY_INPUT_MINUS, DX.KEY_INPUT_PREVTRACK, DX.KEY_INPUT_YEN, DX.KEY_INPUT_SPACE
-                    };
+        {
+            DX.KEY_INPUT_1, DX.KEY_INPUT_2, DX.KEY_INPUT_3,
+            DX.KEY_INPUT_4, DX.KEY_INPUT_5,DX.KEY_INPUT_6,
+            DX.KEY_INPUT_7, DX.KEY_INPUT_8,  DX.KEY_INPUT_9,
+            DX.KEY_INPUT_0,DX.KEY_INPUT_MINUS, DX.KEY_INPUT_PREVTRACK,
+            DX.KEY_INPUT_YEN, DX.KEY_INPUT_SPACE
+        };
+
+        public string[] tilekeys_name =
+        {
+            "1","2","3", "4","5","6", "7","8","9", "0","-","^", "\\", "Space"
+        };
 
         /// <summary>
         /// 牌を切るためのキーが前に押されているか

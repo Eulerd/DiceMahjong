@@ -56,10 +56,10 @@ namespace DiceMohjong
         /// <param name="tile">打牌する牌</param>
         public void RemoveTile(TileNames tile)
         {
-            // 打牌
+            // 河に追加
             MyDiscardedTiles.AddTile(tile);
 
-            // 河に追加
+            // 打牌
             MyHandTiles.DiscarTile(tile);
         }
 
