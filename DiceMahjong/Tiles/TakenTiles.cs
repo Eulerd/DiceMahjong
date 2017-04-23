@@ -27,7 +27,7 @@ namespace MahjongLib
 
             switch (Status)
             {
-                case TakenTileStatus.Chi:
+                case TakenTileStatus.Chow:
                     for (int i = 0; i < 3; i++)
                         tiles.Add(Tile + i);
                     break;

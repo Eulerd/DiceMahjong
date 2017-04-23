@@ -7,14 +7,12 @@
         public const int KingTilesCount = 14;
         public const int CanGetTilesCount = 122;
 
-        public static int[] TileHandle = new int[38];
+        public static int[] TileHandle = new int[39];
     }
 
 
     public enum TileNames
-    {
-        Null = 334,
-
+    { 
         Bamboo1 = 1,
         Bamboo2 = 2,
         Bamboo3 = 3,
@@ -52,13 +50,14 @@
 
         Haku = 35,
         Hatsu = 36,
-        Tyun = 37
+        Tyun = 37,
+        Null = 38
     }
 
     enum TakenTileStatus
     {
         Pon,
-        Chi,
+        Chow,
         Kan
     }
 

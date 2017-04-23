@@ -52,7 +52,7 @@ namespace DiceMohjong.Phases
             DX.DrawString(0, 450, ps[PlayerNum], DX.GetColor(255, 255, 255));
 
             // ツモ牌表示
-            DX.DrawGraph(687, PlayerNum * 80 - ((keytiles.LastKeyPressed()) ? 10 : 0), Mahjong.TileHandle[(int)players[PlayerNum].Hands.LastTile], 0);
+            DX.DrawGraph(687, PlayerNum * 80 - ((keytiles.LastKeyPressed()) ? 10 : 0), Mahjong.TileHandle[(int)players[PlayerNum].Hands.LastTile], 1);
 
             // 各プレイヤー
             for (int i = 0; i < 4; i++)
@@ -64,7 +64,7 @@ namespace DiceMohjong.Phases
                 int j = 0;
                 foreach (var tile in players[i].Hands.GetAllTiles())
                 {
-                    DX.DrawGraph(50 + j * 49, i * 80 - ((keytiles.pressed[j] && PlayerNum == i) ? 10 : 0), Mahjong.TileHandle[(int)tile], 0);
+                    DX.DrawGraph(50 + j * 49, i * 80 - ((keytiles.pressed[j] && PlayerNum == i) ? 10 : 0), Mahjong.TileHandle[(int)tile], 1);
                     j++;
                 }
 
@@ -82,7 +82,7 @@ namespace DiceMohjong.Phases
                 {
                     int x = 350 + j * 20;
                     int y = 400 + i * 32;
-                    DX.DrawExtendGraph(x, y, x + 20, y + 32,Mahjong.TileHandle[(int)tile], 0);
+                    DX.DrawExtendGraph(x, y, x + 20, y + 32,Mahjong.TileHandle[(int)tile], 1);
                     j++;
                 }
             }
