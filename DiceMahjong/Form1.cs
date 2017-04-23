@@ -24,7 +24,7 @@ namespace DiceMohjong
             DX.DxLib_Init();
             DX.SetDrawScreen(DX.DX_SCREEN_BACK);
 
-            DX.LoadDivGraph("mahjong01.png", 35, 9, 5, 48, 72, out Mahjong.TileHandle[0]);
+            DX.LoadDivGraph("../../mahjong01.png", 35, 9, 5, 48, 72, out Mahjong.TileHandle[0]);
 
             // TileNamesの番号にあわせる
             int[] TmpHandle = new int[Mahjong.TileHandle.Length];
