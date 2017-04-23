@@ -26,6 +26,14 @@ namespace DiceMohjong
             "1","2","3", "4","5","6", "7","8","9", "0","-","^", "\\", "Space"
         };
 
+
+        /// <summary>
+        /// 鳴き用キー配列{チー,ポン,カン}
+        /// </summary>
+        int[] takentilekeys = { DX.KEY_INPUT_C, DX.KEY_INPUT_V, DX.KEY_INPUT_B };
+
+        public string[] takentilekeys_name = {"C", "V", "B"};
+
         /// <summary>
         /// 牌を切るためのキーが前に押されているか
         /// </summary>

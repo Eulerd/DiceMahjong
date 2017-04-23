@@ -6,7 +6,7 @@ namespace MahjongLib
     {
         TileNames Tile;
         TakenTileStatus Status;
-        TakenFrom Player;
+        PlayerStatus Player;
 
         /// <summary>
         /// コンストラクター
@@ -14,7 +14,7 @@ namespace MahjongLib
         /// <param name="tile">基準となる牌</param>
         /// <param name="status">鳴いた種類</param>
         /// <param name="player">誰から鳴いたか</param>
-        public TakenTile(TileNames tile, TakenTileStatus status, TakenFrom player)
+        public TakenTile(TileNames tile, TakenTileStatus status, PlayerStatus player)
         {
             Tile = tile;
             Status = status;

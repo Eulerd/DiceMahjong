@@ -8,17 +8,17 @@ namespace DiceMohjong
         /// <summary>
         /// 鳴いた牌リスト
         /// </summary>
-        List<TakenTile> MyTakenTiles = new List<TakenTile>();
+        public List<TakenTile> Takens = new List<TakenTile>();
 
         /// <summary>
         /// 手牌
         /// </summary>
-        public HandTiles MyHandTiles = new HandTiles();
+        public HandTiles Hands = new HandTiles();
 
         /// <summary>
         /// 捨て牌
         /// </summary>
-        public DiscardedTiles MyDiscardedTiles = new DiscardedTiles();
+        public DiscardedTiles DiscTiles = new DiscardedTiles();
 
         /// <summary>
         /// プレイヤーの家
@@ -35,10 +35,10 @@ namespace DiceMohjong
             Status = status;
 
             // 配牌
-            MyHandTiles.SetFirstTiles(walltiles.FirstDrawing());
+            Hands.SetFirstTiles(walltiles.FirstDrawing());
 
             if (status == PlayerStatus.EastPlayer)
-                MyHandTiles.SetTile(walltiles.Drawing());
+                Hands.SetTile(walltiles.Drawing());
         }
         
         /// <summary>
@@ -48,7 +48,7 @@ namespace DiceMohjong
         /// <returns></returns>
         public TileNames GetTileNumberOf(int index)
         {
-            TileNames tile = MyHandTiles.GetTile(index);
+            TileNames tile = Hands.GetTile(index);
 
             return tile;
         }
@@ -60,10 +60,10 @@ namespace DiceMohjong
         public void RemoveTile(TileNames tile)
         {
             // 河に追加
-            MyDiscardedTiles.AddTile(tile);
+            DiscTiles.AddTile(tile);
 
             // 打牌
-            MyHandTiles.DiscarTile(tile);
+            Hands.DiscarTile(tile);
         }
 
         /// <summary>
@@ -72,7 +72,7 @@ namespace DiceMohjong
         /// <param name="tile">手牌に追加する牌</param>
         public void AddTile(TileNames tile)
         {
-            MyHandTiles.SetTile(tile);
+            Hands.SetTile(tile);
         }
     }
 }

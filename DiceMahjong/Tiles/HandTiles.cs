@@ -163,7 +163,7 @@ namespace MahjongLib
         /// </summary>
         /// <param name="tile">カンできるか調べる牌</param>
         /// <returns>カンできるか</returns>
-        public bool Cankan(TileNames tile)
+        public bool CanKan(TileNames tile)
         {
             return (tiletypes[(int)tile] >= 3);
         }
@@ -177,6 +177,7 @@ namespace MahjongLib
         {
             if (TileNames.East <= tile)
                 return false;
+
 
             int i = (int)tile % 10;
             bool flag = false;

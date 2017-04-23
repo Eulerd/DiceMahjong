@@ -18,6 +18,9 @@ namespace DiceMohjong.Phases
         /// </summary>
         WallTiles walltiles = new WallTiles();
 
+        /// <summary>
+        /// 
+        /// </summary>
         KeyForTiles keytiles = new KeyForTiles();
 
         /// <summary>
@@ -44,13 +47,12 @@ namespace DiceMohjong.Phases
         {
             // Debug
             string[] ps = { "東", "南", "西", "北" };
-            int j;
 
             // アクティブなプレイヤー
             DX.DrawString(0, 450, ps[PlayerNum], DX.GetColor(255, 255, 255));
 
             // ツモ牌表示
-            DX.DrawGraph(687, PlayerNum * 80 - ((keytiles.LastKeyPressed()) ? 10 : 0), Mahjong.TileHandle[(int)players[PlayerNum].MyHandTiles.LastTile], 0);
+            DX.DrawGraph(687, PlayerNum * 80 - ((keytiles.LastKeyPressed()) ? 10 : 0), Mahjong.TileHandle[(int)players[PlayerNum].Hands.LastTile], 0);
 
             // 各プレイヤー
             for (int i = 0; i < 4; i++)
@@ -59,8 +61,8 @@ namespace DiceMohjong.Phases
                 DX.DrawString(0, i * 82, ps[(int)players[i].Status], DX.GetColor(255, 255, 255));
 
                 // 手牌を表示
-                j = 0;
-                foreach (var tile in players[i].MyHandTiles.GetAllTiles())
+                int j = 0;
+                foreach (var tile in players[i].Hands.GetAllTiles())
                 {
                     DX.DrawGraph(50 + j * 49, i * 80 - ((keytiles.pressed[j] && PlayerNum == i) ? 10 : 0), Mahjong.TileHandle[(int)tile], 0);
                     j++;
@@ -76,7 +78,7 @@ namespace DiceMohjong.Phases
 
                 // 河を表示
                 j = 0;
-                foreach (var tile in players[i].MyDiscardedTiles.GetAllTiles())
+                foreach (var tile in players[i].DiscTiles.GetAllTiles())
                 {
                     int x = 350 + j * 20;
                     int y = 400 + i * 32;
@@ -93,11 +95,12 @@ namespace DiceMohjong.Phases
             {
                 if(keytiles.IsKeyByUpdate(key, i))
                 {
+                    TileNames lasttile = players[PlayerNum].GetTileNumberOf(i);
                     // 川に捨てる
-                    players[PlayerNum].RemoveTile(players[PlayerNum].GetTileNumberOf(i));
+                    players[PlayerNum].RemoveTile(lasttile);
 
                     PlayerNum = (PlayerNum + 1) % 4;
-
+                    
                     // 山からツモる
                     players[PlayerNum].AddTile(walltiles.Drawing());
                 }
