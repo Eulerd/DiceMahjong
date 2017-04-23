@@ -1,8 +1,8 @@
 ﻿using DiceMohjong.Phases;
 using DxLibDLL;
+using MahjongLib;
 using System;
 using System.Windows.Forms;
-using MahjongLib;
 
 namespace DiceMohjong
 {

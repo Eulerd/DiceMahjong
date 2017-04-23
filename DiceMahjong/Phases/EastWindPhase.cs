@@ -1,5 +1,5 @@
-﻿using MahjongLib;
-using DxLibDLL;
+﻿using DxLibDLL;
+using MahjongLib;
 
 namespace DiceMohjong.Phases
 {
