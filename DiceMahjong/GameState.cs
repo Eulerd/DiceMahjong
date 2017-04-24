@@ -48,7 +48,7 @@ namespace DiceMohjong
             // これ以上自摸れない場合流局
             if (!walltiles.CanDrawing())
                 return new ResultPhase();
-
+            
             PlayerNum = (PlayerNum + 1) % 4;
 
             // 山からツモる
