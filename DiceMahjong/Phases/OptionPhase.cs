@@ -1,4 +1,4 @@
-﻿using System;
+﻿using DxLibDLL;
 
 namespace DiceMohjong.Phases
 {
@@ -9,7 +9,13 @@ namespace DiceMohjong.Phases
     {
         protected override Phase update()
         {
-            throw new NotImplementedException();
+            DX.DrawString(200, 200, "[OptionPhase] 未開発", DX.GetColor(255, 255, 255));
+            DX.DrawString(200, 250, "[q]キーで戻る", DX.GetColor(255, 255, 255));
+
+            if (key.IsPressed(DX.KEY_INPUT_Q))
+                return new StartPhase();
+
+            return this;
         }
     }
 }

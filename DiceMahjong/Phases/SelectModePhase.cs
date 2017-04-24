@@ -9,12 +9,15 @@ namespace DiceMohjong.Phases
     {
         protected override Phase update()
         {
-            MyDraw.DrawScreen(DX.GetColor(100, 255, 100));
-
-            DX.DrawString(0, 0, "東風戦", DX.GetColor(0, 0, 0));
+            DX.DrawString(200, 200, "東風戦", DX.GetColor(255,255,255));
+            DX.DrawString(200, 250, "[Enter]キーで開始", DX.GetColor(255, 255, 255));
+            DX.DrawString(200, 300, "[q]キーで戻る", DX.GetColor(255, 255, 255));
 
             if (key.IsPressed(DX.KEY_INPUT_RETURN))
                 return new EastWindPhase();
+
+            if (key.IsPressed(DX.KEY_INPUT_Q))
+                return new StartPhase();
 
             return this;
         }

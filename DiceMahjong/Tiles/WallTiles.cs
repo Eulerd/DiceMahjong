@@ -56,11 +56,11 @@ namespace MahjongLib
         /// <returns>自摸した牌</returns>
         public Tile Drawing()
         {
+            if (Count > Mahjong.CanGetTilesCount)
+                throw new IndexOutOfRangeException("王稗から通常自摸できません。");
+
             front++;
             Count++;
-
-            if (Count >= 122)
-                throw new IndexOutOfRangeException("王稗から通常自摸できません。");
 
             return tiles[front - 1];
         }
@@ -118,6 +118,11 @@ namespace MahjongLib
                 S += tiles[i];
             }
             return S;
+        }
+
+        public bool CanDrawing()
+        {
+            return (Count < Mahjong.CanGetTilesCount);
         }
 
         /// <summary>

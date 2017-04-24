@@ -99,6 +99,10 @@ namespace DiceMohjong.Phases
                     // 川に捨てる
                     players[PlayerNum].RemoveTile(lasttile);
 
+                    // これ以上自摸れない場合流局
+                    if (!walltiles.CanDrawing())
+                        return new ResultPhase();
+
                     PlayerNum = (PlayerNum + 1) % 4;
                     
                     // 山からツモる
