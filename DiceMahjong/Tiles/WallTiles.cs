@@ -7,7 +7,7 @@ namespace MahjongLib
         /// <summary>
         /// 山牌
         /// </summary>
-        TileNames[] tiles = new TileNames[136];
+        Tile[] tiles = new Tile[136];
 
         /// <summary>
         /// 山牌の次自摸される場所
@@ -38,12 +38,12 @@ namespace MahjongLib
         /// 手牌を配る
         /// </summary>
         /// <returns>手牌</returns>
-        public TileNames[] FirstDrawing()
+        public Tile[] FirstDrawing()
         {
-            TileNames[] tiles;
+            Tile[] tiles;
             int count = 13;
 
-            tiles = new TileNames[count];
+            tiles = new Tile[count];
             for (int i = 0; i < count; i++)
                 tiles[i] = Drawing();
 
@@ -54,7 +54,7 @@ namespace MahjongLib
         /// 自摸
         /// </summary>
         /// <returns>自摸した牌</returns>
-        public TileNames Drawing()
+        public Tile Drawing()
         {
             front++;
             Count++;
@@ -69,7 +69,7 @@ namespace MahjongLib
         /// 王稗から自摸
         /// </summary>
         /// <returns>王稗から自摸した牌</returns>
-        public TileNames DrawingFromKingWall()
+        public Tile DrawingFromKingWall()
         {
             king_front++;
 
@@ -80,9 +80,9 @@ namespace MahjongLib
         /// 表ドラをすべて取得する
         /// </summary>
         /// <returns>すべての表ドラ</returns>
-        public TileNames[] GetAllFrontDoras()
+        public Tile[] GetAllFrontDoras()
         {
-            TileNames[] doras = new TileNames[4];
+            Tile[] doras = new Tile[4];
 
             for (int i = 0; i < 4; i++)
                 doras[i] = tiles[i + 124];
@@ -94,9 +94,9 @@ namespace MahjongLib
         /// 裏ドラをすべて取得する
         /// </summary>
         /// <returns>すべての裏ドラ</returns>
-        public TileNames[] GetAllBackDoras()
+        public Tile[] GetAllBackDoras()
         {
-            TileNames[] doras = new TileNames[4];
+            Tile[] doras = new Tile[4];
 
             for (int i = 0; i < 4; i++)
                 doras[i] = tiles[i + 128];
@@ -134,7 +134,7 @@ namespace MahjongLib
                 if (count % 10 == 0)
                     count++;
 
-                tiles[i] = (TileNames)count;
+                tiles[i] = (Tile)count;
             }
         }
 
@@ -151,7 +151,7 @@ namespace MahjongLib
                 int num = rand.Next(136);
 
                 // swap
-                TileNames tmp = tiles[i];
+                Tile tmp = tiles[i];
                 tiles[i] = tiles[num];
                 tiles[num] = tmp;
             }

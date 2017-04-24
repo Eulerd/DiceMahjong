@@ -46,9 +46,9 @@ namespace DiceMohjong
         /// </summary>
         /// <param name="index"></param>
         /// <returns></returns>
-        public TileNames GetTileNumberOf(int index)
+        public Tile GetTileNumberOf(int index)
         {
-            TileNames tile = Hands.GetTile(index);
+            Tile tile = Hands.GetTile(index);
 
             return tile;
         }
@@ -57,7 +57,7 @@ namespace DiceMohjong
         /// 牌を打つ
         /// </summary>
         /// <param name="tile">打牌する牌</param>
-        public void RemoveTile(TileNames tile)
+        public void RemoveTile(Tile tile)
         {
             // 河に追加
             DiscTiles.AddTile(tile);
@@ -70,7 +70,7 @@ namespace DiceMohjong
         /// 牌を1枚手牌に追加する
         /// </summary>
         /// <param name="tile">手牌に追加する牌</param>
-        public void AddTile(TileNames tile)
+        public void AddTile(Tile tile)
         {
             Hands.SetTile(tile);
         }

@@ -11,23 +11,23 @@ namespace MahjongLib
         /// <summary>
         /// 河にある牌リスト
         /// </summary>
-        List<KeyValuePair<TileNames, TileStatus>> tiles = new List<KeyValuePair<TileNames, TileStatus>>();
+        List<KeyValuePair<Tile, TileStatus>> tiles = new List<KeyValuePair<Tile, TileStatus>>();
 
-        public void AddTile(TileNames tile)
+        public void AddTile(Tile tile)
         {
-            tiles.Add(new KeyValuePair<TileNames, TileStatus>(tile, TileStatus.Normal));
+            tiles.Add(new KeyValuePair<Tile, TileStatus>(tile, TileStatus.Normal));
         }
 
-        public TileNames TakenTile()
+        public Tile TakenTile()
         {
             ChangeStatus(tiles.Count - 1, TileStatus.Taken);
 
             return tiles.Last().Key;
         }
 
-        public TileNames[] GetAllTiles()
+        public Tile[] GetAllTiles()
         {
-            List<TileNames> tmp_tiles = new List<TileNames>();
+            List<Tile> tmp_tiles = new List<Tile>();
 
             for(int i = 0;i < tiles.Count;i++)
                 tmp_tiles.Add(tiles[i].Key);
@@ -43,7 +43,7 @@ namespace MahjongLib
         void ChangeStatus(int index, TileStatus status)
         {
             tiles[index] =
-                new KeyValuePair<TileNames, TileStatus>(tiles[index].Key, status);
+                new KeyValuePair<Tile, TileStatus>(tiles[index].Key, status);
         }
 
         enum TileStatus

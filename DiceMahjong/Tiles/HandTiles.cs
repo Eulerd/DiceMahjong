@@ -14,7 +14,7 @@ namespace MahjongLib
         /// <summary>
         /// 自摸した牌
         /// </summary>
-        public TileNames LastTile { get; private set; }
+        public Tile LastTile { get; private set; }
 
         public int TileCount
         {
@@ -41,14 +41,14 @@ namespace MahjongLib
             for (int i = 0; i < tiletypes.Length; i++)
                 tiletypes[i] = 0;
 
-            LastTile = TileNames.Null;
+            LastTile = Tile.Null;
         }
 
         /// <summary>
         /// 手牌リストから初期化する
         /// </summary>
         /// <param name="hands">元になる手牌</param>
-        public HandTiles(TileNames[] hands)
+        public HandTiles(Tile[] hands)
         {
             for (int i = 0; i < hands.Length - 1; i++)
                 tiletypes[(int)hands[i]]++;
@@ -72,9 +72,9 @@ namespace MahjongLib
         /// 自摸する
         /// </summary>
         /// <param name="tile">自摸する牌</param>
-        public void SetTile(TileNames tile)
+        public void SetTile(Tile tile)
         {
-            if (LastTile != TileNames.Null)
+            if (LastTile != Tile.Null)
                 throw new ArgumentException("打牌される前に自摸されています。");
 
             LastTile = tile;
@@ -85,7 +85,7 @@ namespace MahjongLib
         /// </summary>
         /// <param name="index">取得する手牌の番号</param>
         /// <returns>取得した牌</returns>
-        public TileNames GetTile(int index)
+        public Tile GetTile(int index)
         {
             if (index == 13)
                 return LastTile;
@@ -96,7 +96,7 @@ namespace MahjongLib
                 for(int j = 0;j < tiletypes[i];j++)
                 {
                     if (index == count)
-                        return (TileNames)i;
+                        return (Tile)i;
 
                     count++;
                 }
@@ -109,7 +109,7 @@ namespace MahjongLib
         /// 配牌を手牌に追加する
         /// </summary>
         /// <param name="tiles">元になる牌配列</param>
-        public void SetFirstTiles(TileNames[] tiles)
+        public void SetFirstTiles(Tile[] tiles)
         {
             for (int i = 0; i < tiles.Length; i++)
                 tiletypes[(int)tiles[i]]++;
@@ -119,11 +119,11 @@ namespace MahjongLib
         /// 牌を1枚捨てる
         /// </summary>
         /// <param name="tile">捨てる牌</param>
-        public void DiscarTile(TileNames tile)
+        public void DiscarTile(Tile tile)
         {
             // 自摸牌分追加する
             tiletypes[(int)LastTile]++;
-            LastTile = TileNames.Null;
+            LastTile = Tile.Null;
 
             tiletypes[(int)tile]--;
         }
@@ -132,16 +132,16 @@ namespace MahjongLib
         /// 手牌を取得する
         /// </summary>
         /// <returns>手牌</returns>
-        public TileNames[] GetAllTiles()
+        public Tile[] GetAllTiles()
         {
-            List<TileNames> tiles = new List<TileNames>();
+            List<Tile> tiles = new List<Tile>();
 
             for(int i = 0;i < tiletypes.Length;i++)
             {
                 if(tiletypes[i] != 0)
                 {
                     for (int j = 0; j < tiletypes[i]; j++)
-                        tiles.Add((TileNames)i);
+                        tiles.Add((Tile)i);
                 }
             }
 
@@ -153,7 +153,7 @@ namespace MahjongLib
         /// </summary>
         /// <param name="tile">ポンできるか調べる牌</param>
         /// <returns>ポンできるか</returns>
-        public bool CanPon(TileNames tile)
+        public bool CanPon(Tile tile)
         {
             return (tiletypes[(int)tile] >= 2);
         }
@@ -163,7 +163,7 @@ namespace MahjongLib
         /// </summary>
         /// <param name="tile">カンできるか調べる牌</param>
         /// <returns>カンできるか</returns>
-        public bool CanKan(TileNames tile)
+        public bool CanKan(Tile tile)
         {
             return (tiletypes[(int)tile] >= 3);
         }
@@ -173,9 +173,9 @@ namespace MahjongLib
         /// </summary>
         /// <param name="tile">チーできるか調べる牌</param>
         /// <returns>チーできるか</returns>
-        public bool CanChow(TileNames tile)
+        public bool CanChow(Tile tile)
         {
-            if (TileNames.East <= tile)
+            if (Tile.East <= tile)
                 return false;
 
 
@@ -246,7 +246,7 @@ namespace MahjongLib
                     for (int j = 1; j < 38; j++)
                     {
                         // 順子を含むか
-                        if (tmp_tiletypes.ContainsChow((TileNames)j))
+                        if (tmp_tiletypes.ContainsChow((Tile)j))
                         {
                             tmp_tiletypes[j]--;
                             tmp_tiletypes[j + 1]--;
@@ -295,13 +295,13 @@ namespace MahjongLib
         /// </summary>
         /// <param name="tile">順子の一番前の牌</param>
         /// <returns>含まれるか</returns>
-        bool ContainsChow(TileNames tile)
+        bool ContainsChow(Tile tile)
         {
             int index = (int)tile;
 
             // 数牌の種類を超えての順子判定は、番号を種類ごとに一つ飛ばして割り振ってあるため起こらない
             return
-                (index <= (int)TileNames.East && 
+                (index <= (int)Tile.East && 
                 (tiletypes[index] >= 1 && tiletypes[index + 1] >= 1 && tiletypes[index + 2] >= 1));
         }
 

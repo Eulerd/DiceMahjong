@@ -95,7 +95,7 @@ namespace DiceMohjong.Phases
             {
                 if(keytiles.IsKeyByUpdate(key, i))
                 {
-                    TileNames lasttile = players[PlayerNum].GetTileNumberOf(i);
+                    Tile lasttile = players[PlayerNum].GetTileNumberOf(i);
                     // 川に捨てる
                     players[PlayerNum].RemoveTile(lasttile);
 

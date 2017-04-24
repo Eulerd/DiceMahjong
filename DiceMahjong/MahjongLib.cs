@@ -11,7 +11,7 @@
     }
 
 
-    public enum TileNames
+    public enum Tile
     { 
         Bamboo1 = 1,
         Bamboo2 = 2,
