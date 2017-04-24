@@ -52,6 +52,7 @@
     <Compile Include="Form1.Designer.cs">
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
+    <Compile Include="GameState.cs" />
     <Compile Include="Key.cs" />
     <Compile Include="KeyForTiles.cs" />
     <Compile Include="MyDraw.cs" />

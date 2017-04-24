@@ -10,7 +10,11 @@ namespace DiceMohjong
     {
         public TableDrawer()
         {
+           
+        }
 
+        public void Draw()
+        { 
         }
     }
 }
