@@ -33,9 +33,9 @@ namespace DiceMohjong.Phases
         {
             drawer = new TableDrawer(state);
 
-            drawer.Draw(key);
+            drawer.Draw();
 
-            Tile t = state.ThinkingPlayer.HitTile(key);
+            Tile t = state.ThinkingPlayer.HitTile();
             if(t != Tile.Null)
             {
                 return state.Next(this, t);

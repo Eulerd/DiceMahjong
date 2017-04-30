@@ -16,7 +16,7 @@ namespace DiceMohjong.Phases
         }
 
         protected abstract Phase update();
-        
-        protected static KeyForTiles key = new KeyForTiles();
+
+        protected static KeyForTiles key = GameState.key;
     }
 }

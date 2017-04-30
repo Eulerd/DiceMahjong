@@ -75,4 +75,11 @@
         WestPlayer,
         NorthPlayer
     }
+
+    enum GameStatus
+    {
+        Think,
+        Discard,
+
+    }
 }

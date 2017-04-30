@@ -54,7 +54,7 @@ namespace DiceMohjong
                 pressed[i] = false;
             }
         }
-
+        
         /// <summary>
         /// 番号の牌が選択された状態でもう一度同じキーが押されたか
         /// </summary>

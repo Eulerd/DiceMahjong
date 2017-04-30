@@ -17,8 +17,9 @@ namespace DiceMohjong
             State = state;
         }
 
-        public void Draw(KeyForTiles key)
+        public void Draw()
         {
+            KeyForTiles key = GameState.key;
             int now = State.PlayerNum;
             bool UpTile = key.LastKeyPressed();
             

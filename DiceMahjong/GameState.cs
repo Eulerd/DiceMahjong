@@ -26,6 +26,10 @@ namespace DiceMohjong
 
         public Player[] WaitingPlayers { get; private set; }
 
+        public GameStatus NowState { get; private set; }
+
+        public static KeyForTiles key = new KeyForTiles();
+
         public GameState(Player[] players, WallTiles walltiles)
         {
             this.Players = players;
@@ -42,7 +46,7 @@ namespace DiceMohjong
                               where p != Players[PlayerNum]
                               select p).ToArray();
         }
-
+        
         public Phase Next(Phase now, Tile lasttile)
         {
             // 川に捨てる
@@ -51,6 +55,11 @@ namespace DiceMohjong
             // これ以上自摸れない場合流局
             if (!walltiles.CanDrawing())
                 return new ResultPhase();
+
+            foreach(Player player in WaitingPlayers)
+            {
+                
+            }
 
             PlayerNum = (PlayerNum + 1) % 4;
             PlayerStateUpdate();

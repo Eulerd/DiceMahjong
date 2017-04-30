@@ -25,6 +25,8 @@ namespace DiceMohjong.Players
         /// </summary>
         public PlayerStatus Status;
 
+        KeyForTiles key;
+
         /// <summary>
         /// プレイヤーの家を設定し、山から配牌をとる
         /// </summary>
@@ -44,9 +46,8 @@ namespace DiceMohjong.Players
         /// <summary>
         /// 打牌する牌を返す
         /// </summary>
-        /// <param name="key"></param>
         /// <returns></returns>
-        public abstract Tile HitTile(KeyForTiles key);
+        public abstract Tile HitTile();
         
         /// <summary>
         /// index番目の牌を取得する

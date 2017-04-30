@@ -102,7 +102,7 @@ namespace MahjongLib
                 }
             }
 
-            throw new ArgumentOutOfRangeException();
+            return Tile.Null;
         }
 
         /// <summary>
