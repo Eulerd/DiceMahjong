@@ -1,4 +1,5 @@
 ﻿using MahjongLib;
+using DiceMohjong.Players;
 
 namespace DiceMohjong.Phases
 {
@@ -21,7 +22,7 @@ namespace DiceMohjong.Phases
             for (int i = 0; i < 4; i++)
                 players[i] = new Player(PlayerStatus.EastPlayer + i, walltiles);
 
-            state = new GameState(players, walltiles, new KeyForTiles());
+            state = new GameState(players, walltiles);
         }
 
         /// <summary>
@@ -32,16 +33,16 @@ namespace DiceMohjong.Phases
         {
             drawer = new TableDrawer(state);
 
-            drawer.Draw();
+            drawer.Draw(key);
+            
 
             for (int i = 0; i < Mahjong.HandTileCount; i++)
             {
-                if (state.keytiles.IsKeyByUpdate(key, i))
+                if (key.IsKeyByUpdate(i))
                 {
                     return state.Next(this, i);
                 }
             }
-
 
             return this;
         }

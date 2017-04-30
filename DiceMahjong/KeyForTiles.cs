@@ -2,7 +2,7 @@
 
 namespace DiceMohjong
 {
-    class KeyForTiles
+    class KeyForTiles : Key
     {
         public KeyForTiles()
         {
@@ -58,13 +58,12 @@ namespace DiceMohjong
         /// <summary>
         /// 番号の牌が選択された状態でもう一度同じキーが押されたか
         /// </summary>
-        /// <param name="key">キー情報</param>
         /// <param name="i">判定する手牌の番号</param>
         /// <returns>i番目キーが二回連続で押されたか</returns>
-        public bool IsKeyByUpdate(Key key, int i)
+        public bool IsKeyByUpdate(int i)
         {
             bool f = false;
-            if(key.IsPressed(tilekeys[i]))
+            if(IsPressed(tilekeys[i]))
             {
                 if(pressed[i])
                 {

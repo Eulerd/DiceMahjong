@@ -17,10 +17,10 @@ namespace DiceMohjong
             State = state;
         }
 
-        public void Draw()
+        public void Draw(KeyForTiles key)
         {
             int now = State.PlayerNum;
-            bool UpTile = State.keytiles.LastKeyPressed();
+            bool UpTile = key.LastKeyPressed();
             
             // Debug
             string[] ps = { "東", "南", "西", "北" };
@@ -41,13 +41,13 @@ namespace DiceMohjong
                 int j = 0;
                 foreach (var tile in State.Players[i].Hands.GetAllTiles())
                 {
-                    DX.DrawGraph(50 + j * 49, i * 80 - ((State.keytiles.pressed[j] && now == i) ? 10 : 0), Mahjong.TileHandle[(int)tile], 1);
+                    DX.DrawGraph(50 + j * 49, i * 80 - ((key.pressed[j] && now == i) ? 10 : 0), Mahjong.TileHandle[(int)tile], 1);
                     j++;
                 }
 
                 // キー名を表示
                 j = 0;
-                foreach (string keyname in State.keytiles.tilekeys_name)
+                foreach (string keyname in key.tilekeys_name)
                 {
                     DX.DrawString(55 + j * 49, 350, keyname, DX.GetColor(255, 255, 255));
                     j++;

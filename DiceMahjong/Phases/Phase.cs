@@ -7,6 +7,7 @@ namespace DiceMohjong.Phases
         public Phase Update()
         {
             key.Update();
+
             Phase res = update();
 
             DX.ScreenFlip();
@@ -15,7 +16,7 @@ namespace DiceMohjong.Phases
         }
 
         protected abstract Phase update();
-
-        protected static Key key = new Key();
+        
+        protected static KeyForTiles key = new KeyForTiles();
     }
 }

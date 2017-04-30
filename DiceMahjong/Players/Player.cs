@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using MahjongLib;
 
-namespace DiceMohjong
+namespace DiceMohjong.Players
 {
     class Player
     {
@@ -42,10 +42,10 @@ namespace DiceMohjong
         }
         
         /// <summary>
-        /// 
+        /// index番目の牌を取得する
         /// </summary>
-        /// <param name="index"></param>
-        /// <returns></returns>
+        /// <param name="index">番号</param>
+        /// <returns>indexの牌</returns>
         public Tile GetTileNumberOf(int index)
         {
             Tile tile = Hands.GetTile(index);

@@ -1,10 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using MahjongLib;
+﻿using MahjongLib;
 using DiceMohjong.Phases;
+using DiceMohjong.Players;
 
 namespace DiceMohjong
 {
@@ -21,20 +17,14 @@ namespace DiceMohjong
         public WallTiles walltiles = new WallTiles();
 
         /// <summary>
-        /// 牌用キー情報
-        /// </summary>
-        public KeyForTiles keytiles = new KeyForTiles();
-
-        /// <summary>
         /// 現在アクティブな人
         /// </summary>
         public int PlayerNum;
 
-        public GameState(Player[] players, WallTiles walltiles, KeyForTiles keytiles)
+        public GameState(Player[] players, WallTiles walltiles)
         {
             this.Players = players;
             this.walltiles = walltiles;
-            this.keytiles = keytiles;
 
             PlayerNum = 0;
         }
