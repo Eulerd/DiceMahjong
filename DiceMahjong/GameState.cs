@@ -1,6 +1,7 @@
 ﻿using MahjongLib;
 using DiceMohjong.Phases;
 using DiceMohjong.Players;
+using System.Linq;
 
 namespace DiceMohjong
 {
@@ -19,7 +20,11 @@ namespace DiceMohjong
         /// <summary>
         /// 現在アクティブな人
         /// </summary>
-        public int PlayerNum;
+        public int PlayerNum { get; private set; }
+        
+        public Player ThinkingPlayer { get; private set; }
+
+        public Player[] WaitingPlayers { get; private set; }
 
         public GameState(Player[] players, WallTiles walltiles)
         {
@@ -27,22 +32,31 @@ namespace DiceMohjong
             this.walltiles = walltiles;
 
             PlayerNum = 0;
+            PlayerStateUpdate();
         }
 
-        public Phase Next(Phase now, int last)
+        void PlayerStateUpdate()
         {
-            Tile lasttile = Players[PlayerNum].GetTileNumberOf(last);
+            ThinkingPlayer = Players[PlayerNum];
+            WaitingPlayers = (from p in Players
+                              where p != Players[PlayerNum]
+                              select p).ToArray();
+        }
+
+        public Phase Next(Phase now, Tile lasttile)
+        {
             // 川に捨てる
-            Players[PlayerNum].RemoveTile(lasttile);
+            ThinkingPlayer.RemoveTile(lasttile);
 
             // これ以上自摸れない場合流局
             if (!walltiles.CanDrawing())
                 return new ResultPhase();
-            
+
             PlayerNum = (PlayerNum + 1) % 4;
+            PlayerStateUpdate();
 
             // 山からツモる
-            Players[PlayerNum].AddTile(walltiles.Drawing());
+            ThinkingPlayer.AddTile(walltiles.Drawing());
 
             return now;
         }

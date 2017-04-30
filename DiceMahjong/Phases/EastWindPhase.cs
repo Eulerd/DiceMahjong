@@ -20,7 +20,7 @@ namespace DiceMohjong.Phases
             WallTiles walltiles = new WallTiles();
             Player[] players = new Player[4];
             for (int i = 0; i < 4; i++)
-                players[i] = new Player(PlayerStatus.EastPlayer + i, walltiles);
+                players[i] = new KeyboardPlayer(PlayerStatus.EastPlayer + i, walltiles);
 
             state = new GameState(players, walltiles);
         }
@@ -34,16 +34,13 @@ namespace DiceMohjong.Phases
             drawer = new TableDrawer(state);
 
             drawer.Draw(key);
-            
 
-            for (int i = 0; i < Mahjong.HandTileCount; i++)
+            Tile t = state.ThinkingPlayer.HitTile(key);
+            if(t != Tile.Null)
             {
-                if (key.IsKeyByUpdate(i))
-                {
-                    return state.Next(this, i);
-                }
+                return state.Next(this, t);
             }
-
+            
             return this;
         }
     }

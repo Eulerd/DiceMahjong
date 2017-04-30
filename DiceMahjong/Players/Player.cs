@@ -3,7 +3,7 @@ using MahjongLib;
 
 namespace DiceMohjong.Players
 {
-    class Player
+    abstract class Player
     {
         /// <summary>
         /// 鳴いた牌リスト
@@ -40,6 +40,13 @@ namespace DiceMohjong.Players
             if (status == PlayerStatus.EastPlayer)
                 Hands.SetTile(walltiles.Drawing());
         }
+
+        /// <summary>
+        /// 打牌する牌を返す
+        /// </summary>
+        /// <param name="key"></param>
+        /// <returns></returns>
+        public abstract Tile HitTile(KeyForTiles key);
         
         /// <summary>
         /// index番目の牌を取得する

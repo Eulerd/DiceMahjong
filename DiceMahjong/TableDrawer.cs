@@ -29,13 +29,13 @@ namespace DiceMohjong
             DX.DrawString(0, 450, ps[now], DX.GetColor(255, 255, 255));
 
             // ツモ牌表示
-            DX.DrawGraph(687, now * 80 - ((UpTile) ? 10 : 0), Mahjong.TileHandle[(int)State.Players[now].Hands.LastTile], 1);
+            DX.DrawGraph(687, now * 80 - ((UpTile) ? 10 : 0), Mahjong.TileHandle[(int)State.ThinkingPlayer.Hands.LastTile], 1);
 
             // 各プレイヤー
             for (int i = 0; i < 4; i++)
             {
                 // 家を表示
-                DX.DrawString(0, i * 82, ps[(int)State.Players[i].Status], DX.GetColor(255, 255, 255));
+                DX.DrawString(0, i * 82, ps[i], DX.GetColor(255, 255, 255));
 
                 // 手牌を表示
                 int j = 0;
